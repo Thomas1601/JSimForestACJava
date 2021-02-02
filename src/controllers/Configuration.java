@@ -10,8 +10,8 @@ public class Configuration {
      * Configuration generale de l'application
      * */
     // Valeurs par defauts
-    public static final int DEFAULTVALEWIDTH = 100;
-    public static final int DEFAULTVALEHEIGHT = 100;
+    public static final int DEFAULTVALEWIDTH = 30;
+    public static final int DEFAULTVALEHEIGHT = 30;
 
     public static final int CROISSANCEDESARBRES = 1;
     public static final int FEUXDEFORET = 2;

@@ -78,7 +78,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerCoissanceDesArbre();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 500);
                         }
                     } catch (InterruptedException e) {
 
@@ -94,7 +94,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerFeuDeForet();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 300);
                         }
                     } catch (InterruptedException e) {
 

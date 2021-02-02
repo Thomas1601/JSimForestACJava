@@ -68,40 +68,23 @@ public class Simulation {
         int row = cellule.getxCell();
         int col = cellule.getyCell();
 
-        try {
-            voisins.add(Configuration.CELLULES[row + 1][col]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row + 1][col + 1]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row][col + 1]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row - 1][col + 1]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row - 1][col]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row - 1][col - 1]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row][col - 1]);
-        } catch (Exception ignored) { }
-
-        try {
-            voisins.add(Configuration.CELLULES[row + 1][col - 1]);
-        } catch (Exception ignored) { }
+                ajouterVoisin(row + 1, col, voisins);
+                ajouterVoisin(row - 1, col, voisins);
+                ajouterVoisin(row + 1, col+1, voisins);
+                ajouterVoisin(row - 1, col -1, voisins);
+                ajouterVoisin(row + 1, col -1, voisins);
+                ajouterVoisin(row - 1, col+1, voisins);
+                ajouterVoisin(row, col -1, voisins);
+                ajouterVoisin(row, col+1, voisins);
 
         return voisins;
     }
+
+        private static void ajouterVoisin(int X, int Y, List<Cellule> voisins) {
+            if ((X >= 0) && (X < Configuration.LARGEURGRILLE) && (Y>=0) && (Y < Configuration.LONGEURGRILLE)){
+                voisins.add(Configuration.CELLULES[Y][X]);
+                }
+        }
 
     public static List<Cellule> voisinDeVonNeumann(Cellule cellule) {
         // Ensemble des celulle voisin
@@ -110,31 +93,20 @@ public class Simulation {
         int row = cellule.getxCell();
         int col = cellule.getyCell();
 
-        try {
-            voisins.add(Configuration.CELLULES[row][col + 1]);
-        } catch (Exception ignored) {
-
-        }
-        try {
-            voisins.add(Configuration.CELLULES[row - 1][col]);
-        } catch (Exception ignored) {
-
-        }
-        try {
-            voisins.add(Configuration.CELLULES[row][col - 1]);
-        } catch (Exception ignored) {
-
-        }
-        try {
-            voisins.add(Configuration.CELLULES[row + 1][col]);
-        } catch (Exception ignored) {
-
-        }
+            ajouterVoisin(row, col+1, voisins);
+            ajouterVoisin(row, col-1, voisins);
+            ajouterVoisin(row + 1, col, voisins);
+            ajouterVoisin(row - 1, col, voisins);
 
         return voisins;
     }
 
     private static Cellule nouveauEtatCoissanceArbre(Cellule cellule, List<Cellule> voisins) {
+/*
+        System.out .println("*********************");
+        System.out.println(cellule.getxCell() + " " + cellule.getyCell());
+*/
+
 
         int nbArbuste = 0;
         int nbArbre = 0;
@@ -144,6 +116,9 @@ public class Simulation {
                 nbArbuste++;
             if (c.getEtatCell().equals(EtatEnum.ARBRE))
                 nbArbre++;
+/*
+            System.out.println(c.getxCell() + " " + c.getyCell());
+*/
         }
 
         // Naissances des arbres
@@ -171,7 +146,6 @@ public class Simulation {
             nbArbuste = 0;
             return cellule;
         }
-
 
     // Croissance des arbustes
         if (cellule.getEtatCell().equals(EtatEnum.ARBUSTE)) {
