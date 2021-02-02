@@ -17,8 +17,8 @@ public class Fenetre extends JFrame implements Runnable {
      * */
 
     // Propritete
-    public static final int HEIGHT = 600;
-    public static final int WIDTH = 480;
+    public static final int HEIGHT = 900;
+    public static final int WIDTH = 1200;
 
 
     // attributes

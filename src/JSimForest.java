@@ -16,6 +16,7 @@ public class JSimForest {
         fenetre.run();
         fenetre.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         fenetre.setLocationRelativeTo(null);
+        fenetre.setResizable(false);
     }
 
 }
