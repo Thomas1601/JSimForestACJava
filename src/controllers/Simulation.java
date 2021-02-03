@@ -15,6 +15,8 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
+
+                //APPLICATION DU VOISINAGE DE MOORE LORS DE LA LECTURE CROISSANCE
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeMoore(cellule);
                 Cellule c = nouveauEtatCoissanceArbre(cellule, voisins);
@@ -34,6 +36,8 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
+
+                //APPLICATION DU VOISINAGE DE VON NEUMANN LORS DE L\'INCENDIE
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeMoore(cellule);
                 Cellule c = nouveauEtatFeuDeForet(cellule, voisins);
@@ -51,6 +55,8 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
+
+                //APPLICATION DU VOISINAGE DE VON NEUMANN LORS DE L\'INFECTION
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeVonNeumann(cellule);
                 Cellule c = nouveauEtatInvesionInsect(cellule, voisins);
@@ -68,6 +74,7 @@ public class Simulation {
         int row = cellule.getxCell();
         int col = cellule.getyCell();
 
+        //AJOUT DE LA CLASSE LIMITE DE LA GRILLE AU VOISINAGE MOORE
                 ajouterVoisin(row + 1, col, voisins);
                 ajouterVoisin(row - 1, col, voisins);
                 ajouterVoisin(row + 1, col+1, voisins);
@@ -79,7 +86,8 @@ public class Simulation {
 
         return voisins;
     }
-
+        //AJOUT DE CETTE CLASSE POUR FAIRE EN SORTE QUE QUAND LE VOISINAGE
+        // NE DEPASSE PAS LES LIMITES DE LA GRILLE ET CONTINU
         private static void ajouterVoisin(int X, int Y, List<Cellule> voisins) {
             if ((X >= 0) && (X < Configuration.LARGEURGRILLE) && (Y>=0) && (Y < Configuration.LONGEURGRILLE)){
                 voisins.add(Configuration.CELLULES[Y][X]);
@@ -93,7 +101,8 @@ public class Simulation {
         int row = cellule.getxCell();
         int col = cellule.getyCell();
 
-            ajouterVoisin(row, col+1, voisins);
+        //AJOUT DE LA CLASSE LIMITE DE LA GRILLE AU VOISINAGE VON NEUMANN
+        ajouterVoisin(row, col+1, voisins);
             ajouterVoisin(row, col-1, voisins);
             ajouterVoisin(row + 1, col, voisins);
             ajouterVoisin(row - 1, col, voisins);
@@ -102,7 +111,8 @@ public class Simulation {
     }
 
     private static Cellule nouveauEtatCoissanceArbre(Cellule cellule, List<Cellule> voisins) {
-/*
+// TEST POUR SAVOIR SI LE VOISINAGE ME RENVOI LES BONNES COORDONNEES DE LA GRILLE
+        /*
         System.out .println("*********************");
         System.out.println(cellule.getxCell() + " " + cellule.getyCell());
 */
@@ -116,7 +126,9 @@ public class Simulation {
                 nbArbuste++;
             if (c.getEtatCell().equals(EtatEnum.ARBRE))
                 nbArbre++;
-/*
+
+// TEST POUR SAVOIR SI LE VOISINAGE ME RENVOI LES BONNES COORDONNEES DE LA GRILLE POUR JEUNE POUSSE -> ARBUSTE
+            /*
             System.out.println(c.getxCell() + " " + c.getyCell());
 */
         }
