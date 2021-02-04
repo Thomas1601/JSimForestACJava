@@ -20,7 +20,6 @@ public class Fenetre extends JFrame implements Runnable {
     public static final int HEIGHT = 900;
     public static final int WIDTH = 1200;
 
-
     // attributes
     public static JTabbedPane jTabbedPane;
     public static JPanel zoneBoutons;
@@ -78,7 +77,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerCoissanceDesArbre();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 500);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
                         }
                     } catch (InterruptedException e) {
 
@@ -94,7 +93,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerFeuDeForet();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 300);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
                         }
                     } catch (InterruptedException e) {
 
@@ -110,11 +109,9 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerInvasionDInsects();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
                         }
-                    } catch (InterruptedException e) {
-
-                    }
+                    } catch (InterruptedException ignored) { }
                 });
                 thread.start();
             }
@@ -124,7 +121,7 @@ public class Fenetre extends JFrame implements Runnable {
         pause.addActionListener(v -> {
             try {
                 thread.interrupt();
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         });
 
         // Menu
@@ -202,6 +199,7 @@ public class Fenetre extends JFrame implements Runnable {
         // ajouter les cellule
         gbc = new GridBagConstraints();
         // Tableau des dellules
+        Configuration.CELLULES = null;
         Configuration.CELLULES = new Cellule[Configuration.LONGEURGRILLE][Configuration.LARGEURGRILLE];
         // Remplissage
         for (int row = 0; row < Configuration.LONGEURGRILLE; row++) {

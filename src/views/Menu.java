@@ -32,12 +32,9 @@ public class Menu extends JMenuBar {
 
         // def sous menus
         // Fichier
-        sauvegarder = new JMenuItem("Sauvegarder",
-                new ImageIcon("JSimForestProject/img/enregistrer.gif"));
-        charger = new JMenuItem("Charger",
-                new ImageIcon("JSimForestProject/img/nouveau.gif"));
-        quitter = new JMenuItem("Quitter",
-                new ImageIcon("JSimForestProject/img/exit.gif"));
+        sauvegarder = new JMenuItem("Sauvegarder");
+        charger = new JMenuItem("Charger");
+        quitter = new JMenuItem("Quitter");
 
         // Simuler
         croissance = new JMenuItem("Croissance des arbres");

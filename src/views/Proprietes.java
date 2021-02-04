@@ -46,6 +46,7 @@ public class Proprietes extends JOptionPane {
             Configuration.LARGEURGRILLE = Integer.parseInt(labelFieldMap.get("Largeur").getText());
             Configuration.NOMBREDEPAS = Integer.parseInt(labelFieldMap.get("Nombre de pas").getText());
             Configuration.VITESSESIMULATION = Integer.parseInt(labelFieldMap.get("Rapidité").getText());
+            Configuration.PASACTUELLE = 0;
 
             Fenetre.changerGrille();
         }

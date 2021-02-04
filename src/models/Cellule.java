@@ -46,11 +46,11 @@ public class Cellule extends JPanel {
 
     public Cellule(int x, int y, EtatEnum etat, int posEta) {
         // Couleur sellon l'etat
-        etatCell = etat;
+        this.etatCell = etat;
         setBackground(Color.decode(etatCell.getCouleur()));
-        posEtat = posEta;
-        xCell = x;
-        yCell = y;
+        this.posEtat = posEta;
+        this.xCell = x;
+        this.yCell = y;
 
         this.addMouseListener(new MouseAdapter() {
             @Override

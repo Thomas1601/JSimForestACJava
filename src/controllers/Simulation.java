@@ -15,8 +15,6 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
-
-                //APPLICATION DU VOISINAGE DE MOORE LORS DE LA LECTURE CROISSANCE
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeMoore(cellule);
                 Cellule c = nouveauEtatCoissanceArbre(cellule, voisins);
@@ -36,8 +34,6 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
-
-                //APPLICATION DU VOISINAGE DE VON NEUMANN LORS DE L\'INCENDIE
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeMoore(cellule);
                 Cellule c = nouveauEtatFeuDeForet(cellule, voisins);
@@ -55,8 +51,6 @@ public class Simulation {
         int row, col;
         for ( row = 0; row < Configuration.LONGEURGRILLE; row++) {
             for (col = 0; col < Configuration.LARGEURGRILLE; col++) {
-
-                //APPLICATION DU VOISINAGE DE VON NEUMANN LORS DE L\'INFECTION
                 cellule = Configuration.CELLULES[row][col];
                 voisins = voisinDeVonNeumann(cellule);
                 Cellule c = nouveauEtatInvesionInsect(cellule, voisins);
@@ -66,7 +60,6 @@ public class Simulation {
         Configuration.PASACTUELLE = Configuration.PASACTUELLE + 1;
         Fenetre.dessinerNouveauEtat(nouveau);
     }
-
     public static List<Cellule> voisinDeMoore(Cellule cellule) {
         // Ensemble des celulle voisin
         List<Cellule> voisins = new ArrayList<>();
@@ -110,27 +103,18 @@ public class Simulation {
         return voisins;
     }
 
-    private static Cellule nouveauEtatCoissanceArbre(Cellule cellule, List<Cellule> voisins) {
-// TEST POUR SAVOIR SI LE VOISINAGE ME RENVOI LES BONNES COORDONNEES DE LA GRILLE
-        /*
-        System.out .println("*********************");
-        System.out.println(cellule.getxCell() + " " + cellule.getyCell());
-*/
-
+    private static Cellule nouveauEtatCoissanceArbre(Cellule cel, List<Cellule> voisins) {
 
         int nbArbuste = 0;
         int nbArbre = 0;
 
+        Cellule cellule = new Cellule(cel.getxCell(), cel.getyCell(), cel.getEtatCell(), cel.getPosEtat());
+
         for (Cellule c : voisins) {
             if (c.getEtatCell().equals(EtatEnum.ARBUSTE))
-                nbArbuste++;
+                nbArbuste += 1;
             if (c.getEtatCell().equals(EtatEnum.ARBRE))
-                nbArbre++;
-
-// TEST POUR SAVOIR SI LE VOISINAGE ME RENVOI LES BONNES COORDONNEES DE LA GRILLE POUR JEUNE POUSSE -> ARBUSTE
-            /*
-            System.out.println(c.getxCell() + " " + c.getyCell());
-*/
+                nbArbre += 1;
         }
 
         // Naissances des arbres
@@ -141,7 +125,7 @@ public class Simulation {
             if ((nbArbuste >= 3)) {
                 cellule.setEtatCell(EtatEnum.JEUNEPOUSSE);
             }
-            if ((nbArbre == 1) && (nbArbuste == 2)) {
+            if ((nbArbre == 1 && nbArbuste == 2)) {
                 cellule.setEtatCell(EtatEnum.JEUNEPOUSSE);
             }
             nbArbre = 0;
@@ -151,7 +135,7 @@ public class Simulation {
 
         // Croissance des jeunes
         if (cellule.getEtatCell().equals(EtatEnum.JEUNEPOUSSE)) {
-            if ((nbArbre <= 3) && (nbArbuste <= 3)) {
+            if ((nbArbre <= 3) || (nbArbuste <= 3)) {
                 cellule.setEtatCell(EtatEnum.ARBUSTE);
             }
             nbArbre = 0;
@@ -159,7 +143,7 @@ public class Simulation {
             return cellule;
         }
 
-    // Croissance des arbustes
+        // Croissance des arbustes
         if (cellule.getEtatCell().equals(EtatEnum.ARBUSTE)) {
             if ((Configuration.PASACTUELLE > 0) && (Configuration.PASACTUELLE % 2 == 0)) {
                 cellule.setEtatCell(EtatEnum.ARBRE);
@@ -173,9 +157,11 @@ public class Simulation {
         return cellule;
     }
 
-    private static Cellule nouveauEtatFeuDeForet(Cellule cellule, List<Cellule> voisins) {
+    private static Cellule nouveauEtatFeuDeForet(Cellule cel, List<Cellule> voisins) {
 
         int nbFeu = 0;
+
+        Cellule cellule = new Cellule(cel.getxCell(), cel.getyCell(), cel.getEtatCell(), cel.getPosEtat());
 
         for (Cellule c : voisins) {
             if (c.getEtatCell().equals(EtatEnum.ENFEU))
@@ -193,9 +179,9 @@ public class Simulation {
         }
 
         if (nbFeu >= 1) {
-            // 25 % de chance
+            // 25 % de chance A + B = 1 => B = 1 - A
             if (cellule.getEtatCell().equals(EtatEnum.JEUNEPOUSSE)) {
-                double prob = 1 - Math.random();
+                double prob = 1 - Math.random(); // 0 - 1
                 if (prob >= 0.75) {
                     cellule.setEtatCell(EtatEnum.ENFEU);
                 }
@@ -227,9 +213,11 @@ public class Simulation {
         return cellule;
     }
 
-    private static Cellule nouveauEtatInvesionInsect(Cellule cellule, List<Cellule> voisins) {
+    private static Cellule nouveauEtatInvesionInsect(Cellule cel, List<Cellule> voisins) {
 
         int nbInfec = 0;
+
+        Cellule cellule = new Cellule(cel.getxCell(), cel.getyCell(), cel.getEtatCell(), cel.getPosEtat());
 
         for (Cellule c : voisins) {
             if (c.getEtatCell().equals(EtatEnum.INFECTE))
