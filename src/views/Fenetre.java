@@ -34,7 +34,10 @@ public class Fenetre extends JFrame implements Runnable {
     private static JButton demarrer, toutlespas, pause;
 
     public Fenetre() {
-        super("JSimForest");
+        super("                                                                                                    Simulateur d'environnement Naturelle JSimForest soumis aux incendies et invasions insectes");
+        this.setLocationRelativeTo(null);
+
+
 
         // JTabbedPane
         jTabbedPane = new JTabbedPane();
@@ -77,7 +80,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerCoissanceDesArbre();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
                         }
                     } catch (InterruptedException e) {
 
@@ -93,7 +96,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerFeuDeForet();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
                         }
                     } catch (InterruptedException e) {
 
@@ -109,7 +112,7 @@ public class Fenetre extends JFrame implements Runnable {
                         int pas;
                         for (pas = 0; pas < Configuration.NOMBREDEPAS; pas++) {
                             Simulation.simulerInvasionDInsects();
-                            Thread.sleep(Configuration.VITESSESIMULATION * 250);
+                            Thread.sleep(Configuration.VITESSESIMULATION * 1000);
                         }
                     } catch (InterruptedException ignored) { }
                 });

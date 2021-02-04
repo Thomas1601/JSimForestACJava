@@ -38,7 +38,7 @@ public class Menu extends JMenuBar {
 
         // Simuler
         croissance = new JMenuItem("Croissance des arbres");
-        feux = new JMenuItem("Feux de forête");
+        feux = new JMenuItem("Feu de forêt");
         insect = new JMenuItem("Invasion d'insectes");
 
         // Configurer
